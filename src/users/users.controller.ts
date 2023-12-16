@@ -6,8 +6,9 @@ import {
     Param,
     Post,
     ParseIntPipe,
+    Put,
   } from '@nestjs/common';
-  import { CreateUserDto } from './users.dto';
+  import { CreateUserDto, UpdateUserDto } from './users.dto';
   import { User } from './users.entity';
   import { UsersService } from './users.service';
   
@@ -34,5 +35,11 @@ import {
     remove(@Param('id') id: string): Promise<void> {
       return this.usersService.remove(id);
     }
+
+    @Put(':id')
+    async update(@Param('id') id: number, @Body() updateUserDto: UpdateUserDto) {
+      return this.usersService.update(id, updateUserDto);
+    }
+  
   }
   
